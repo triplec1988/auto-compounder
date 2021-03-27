@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.0;
+pragma solidity >=0.6.0 <0.8.3;
 pragma experimental ABIEncoderV2;
 
-import "interfaces/erc20/IERC20.sol";
+import "../erc20/IERC20.sol";
 
 // Info of each pool.
 struct PoolInfo {

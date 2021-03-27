@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.5.0 <0.8.2;
+pragma solidity >=0.5.0 <0.8.3;
 
 interface IController {
     function withdraw(address, uint256) external;

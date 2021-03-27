@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.11;
+pragma solidity >=0.6.11;
 
 import "./CellarAccessControl.sol";
 
 /*
     Add ability to prevent unwanted contract access to Cellar permissions
 */
-contract CellarAccessControlDefended is CellarAccessControl {
+contract CellarAccessControlAuthorizer is CellarAccessControl {
     mapping (address => bool) public approved;
 
     function approveContractAccess(address account) external {

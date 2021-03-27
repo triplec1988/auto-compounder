@@ -1,15 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity >= 0.6.0 < 0.8.3;
+pragma solidity >=0.6.0 <0.8.3;
 
 /**
  * @dev Interface of the ERC20 standard as defined in the EIP.
  */
-interface IERC20Upgradeable {
+interface IERC20Detailed {
     /**
      * @dev Returns the amount of tokens in existence.
      */
     function totalSupply() external view returns (uint256);
+
+    function name() external view returns (string memory);
+    function symbol() external view returns (string memory);
 
     /**
      * @dev Returns the amount of tokens owned by `account`.

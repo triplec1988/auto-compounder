@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.11;
+pragma solidity >=0.6.11;
 
 import "../../deps/@openzeppelin/contracts-upgradeable/token/ERC20/IERC20Upgradeable.sol";
 import "../../deps/@openzeppelin/contracts-upgradeable/math/SafeMathUpgradeable.sol";
@@ -10,7 +10,7 @@ import "../../deps/@openzeppelin/contracts-upgradeable/token/ERC20/ERC20Upgradea
 import "../../deps/@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "../../deps/@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 
-import "../../interfaces/badger/IController.sol";
+import "../../interfaces/cellar/IController.sol";
 import "../../interfaces/erc20/IERC20Detailed.sol";
 import "./CellarAccessControlAuthorizer.sol";
 
@@ -44,7 +44,6 @@ contract Cellar is ERC20Upgradeable, CellarAccessControlAuthorizer, PausableUpgr
         address _governance,
         address _keeper,
         address _guardian,
-        bool _overrideTokenName,
         string memory _namePrefix,
         string memory _symbolPrefix
     ) public initializer whenNotPaused {
@@ -69,7 +68,7 @@ contract Cellar is ERC20Upgradeable, CellarAccessControlAuthorizer, PausableUpgr
 
         min = 9500;
 
-        emit FullPricePerShareUpdated(getPricePerFullShare(), now, block.number);
+        emit FullPricePerShareUpdated(getPricePerFullShare(), block.timestamp, block.number);
 
         // Paused on launch
         _pause();
@@ -91,7 +90,7 @@ contract Cellar is ERC20Upgradeable, CellarAccessControlAuthorizer, PausableUpgr
 
     /// ===== View Functions =====
 
-    function version() public view returns (string memory) {
+    function version() public pure returns (string memory) {
         return "1.0.0";
     }
 
@@ -205,7 +204,7 @@ contract Cellar is ERC20Upgradeable, CellarAccessControlAuthorizer, PausableUpgr
     /// @dev Provides a pure on-chain way of approximating APY
     function trackFullPricePerShare() external whenNotPaused {
         _onlyAuthorizedActors();
-        emit FullPricePerShareUpdated(getPricePerFullShare(), now, block.number);
+        emit FullPricePerShareUpdated(getPricePerFullShare(), block.timestamp, block.number);
     }
 
     function pause() external {
